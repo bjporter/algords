@@ -83,6 +83,13 @@ LinkedList.prototype.remove = function(index) {
         return;
      }
     
+    if(index === 0) {
+        console.log('removed first item');
+        
+        this.head = this.head.next;
+        return;
+     }
+    
     var previous = null;
     var record = this.head; 
     var count = 0;
