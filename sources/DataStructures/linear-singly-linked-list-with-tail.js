@@ -129,8 +129,6 @@ LinkedList.prototype.remove = function(index) {
     }
         
     this.count--;
-    
-    return record.data;
 }
 
 function OutOfBoundsException(message) {
