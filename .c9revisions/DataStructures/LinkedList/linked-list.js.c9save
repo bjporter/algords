@@ -1,3 +1,0 @@
-{"ts":1342023911899,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
-{"contributors":[],"silentsave":false,"ts":1342023916754,"patch":[[{"diffs":[[1,"console.log(\"test\");"]],"start1":0,"start2":0,"length1":0,"length2":20}]],"length":20,"saved":false}
-{"ts":1342024851426,"patch":[[{"diffs":[[-1,"console.log(\"test\");"],[1,"\n"]],"start1":0,"start2":0,"length1":20,"length2":1}]],"length":1,"saved":false}
