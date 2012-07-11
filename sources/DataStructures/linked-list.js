@@ -5,9 +5,6 @@ function Node() {
 
 function LinkedList() {
     this.head = null;
-    this.current_node = null;
-    this.count = null;
-    //this.tail = null;
 }
 
 LinkedList.prototype.add = function(data) {    
@@ -17,7 +14,6 @@ LinkedList.prototype.add = function(data) {
         this.head = new Node();
         this.head.data = data;
         
-        //this.tail = this.head;
         this.count++;
 
     }
@@ -25,15 +21,6 @@ LinkedList.prototype.add = function(data) {
         console.log('The list is not empty');
         var node = new Node();
         node.data = data;
-                
-        /*for(var i = 0; i < this.count - 1; i++) {
-            if(record.next === null)
-                record.next = data; 
-            else
-                record = record.next;
-        }
-                
-        record = record.next; */
         
         this.count++;
         
@@ -45,9 +32,6 @@ LinkedList.prototype.add = function(data) {
         
         record.next = node;
         console.log(record.data + ', ' + record.next.data);
-        
-        //this.tail.next = node;
-        //this.tail = node;
     }
     
     console.log('added: ' + data + ', count: ' + this.count);
@@ -64,10 +48,6 @@ LinkedList.prototype.item = function(index) {
         record = record.next;
         count++;    
     }
-        
-    //for(var i = 0; i < index; i++) {
-    //    record = record.next;       
-   // }
     
     console.log('retrieving value ' + record.data + ' at index ' + index);
     
@@ -80,7 +60,6 @@ LinkedList.prototype.remove = function(index) {
      
     var record = this.head; 
     var count = 0;
-    //[head]->[1]->[2]->[3]
 
     while(count != index) {
         record = record.next;
@@ -103,20 +82,6 @@ function OutOfBoundsException(message) {
 OutOfBoundsException.prototype = new Error();
 OutOfBoundsException.prototype.constructor = OutOfBoundsException;
 
-
-/*
-    constructor: function() { alert('constructing'); },
-    head: new Node(),
-    add: function(data) {
-
-    },
-    remove: function(index) {
-        console.log('removing: ' + index);
-    },
-    item: function(index) {
-        console.log('retrieving: ' + index);
-    }
-*/
 
 var linkedList = new LinkedList();
 linkedList.add(1);
