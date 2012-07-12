@@ -1,5 +1,5 @@
 # Algorithms and Data Structures
 
     Added:
-        1) Linear Linked List
-        2) Linear Linked List with a Tail
+        1) Linear Singly Linked List
+        2) Linear Singly Linked List with a Tail
