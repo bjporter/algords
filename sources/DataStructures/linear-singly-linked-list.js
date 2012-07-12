@@ -26,10 +26,7 @@ LinkedList.prototype.add = function(data) {
         }
         
         record.next = node;
-        //console.log(record.data + ', ' + record.next.data);
     }
-    
-    //console.log('added: ' + data);
 };
 
 LinkedList.prototype.item = function(index) {
@@ -107,16 +104,65 @@ LinkedList.prototype.remove = function(index) {
     console.log('removed item ' + record.data + ' at index ' + index);
     
 
-    if(record.next === null) {
-
+    if(record.next === null) { //If removing at the end
         previous.next = null;
         console.log("replaced by " +  null);
-    }
-    else {        
+    } else {
         console.log(" replaced by " + record.next.data);
         record.data = record.next.data;
         record.next = record.next.next;
     }
+};
+
+LinkedList.prototype.count = function() {
+    var count = 1;
+    var record = this.head;
+    
+    if(this.head === null) return 0;
+    else if(this.head.next === null) return 1;
+    else {
+        while(record.next !== null) {
+            record = record.next;
+            count++;   
+        }
+        
+        return count;
+    }
+}
+
+LinkedList.prototype.insert = function(data, index) {
+    if(index < 0) throw new OutOfBoundsException();
+
+    var record = this.head;
+    var previous = null;
+    var count = 0;
+    var node = new Node();
+
+    if(index === 0) { //Place at head
+        node.data = this.head.data;
+        node.next = this.head.next;
+        
+        this.head.data = data;
+        this.head.next = node;
+        console.log('inserting value ' + data + ' at index ' + index + ' ' + this.head.data);
+        return;
+    }
+
+    while(count != index) {
+        previous = record;
+        
+        record = record.next;
+        count++;
+    }
+    
+    node = new Node();
+    node.data = data;
+    node.next = record;
+    
+    previous.next = node;
+
+    console.log('inserting value ' + data + ' at index ' + index);
+
 };
 
 function OutOfBoundsException(message) {
@@ -135,12 +181,35 @@ linkedList.add(4);
 
 linkedList.print();
 
-linkedList.remove(3);
-
-linkedList.print();
-
+//Remove First
 linkedList.remove(0);
 
+//Remove Middle
+linkedList.remove(1);
+
+//Remove End
+linkedList.remove(1);
+
+//Remove last one
+linkedList.remove(0);
+
+linkedList.print(); //Empty List
+
+linkedList.add(10);
+linkedList.add(20);
+linkedList.add(30);
+linkedList.add(40);
+
+linkedList.item(0); //10
+linkedList.item(1); //20
+linkedList.item(2); //30
+linkedList.item(3); //40
+
+linkedList.insert(5, 0); //Insert in front
+linkedList.insert(12, 2); //Insert between 10, and 20
+linkedList.insert(28, 4); //Insert between 20, and 30
+linkedList.insert(114,7); //Insert at the end
+
 linkedList.print();
 
-
+console.log('The Count = ' + linkedList.count());
