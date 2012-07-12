@@ -13,7 +13,6 @@ function Node(values) {
 
 function LinkedList() {
     this.head = null;
-    //this.count = 0;
 }
 
 LinkedList.prototype.prepend = function(data) {    
@@ -27,9 +26,6 @@ LinkedList.prototype.prepend = function(data) {
     else //If list is empty
         this.head = new Node({ data : data, next : null});
     
-    //this.count++;
-    
-    console.log('Prepending: ' + data);
 };
 
 //First case - empty list: Simply prepend
@@ -100,7 +96,33 @@ LinkedList.prototype.item = function(index) {
     return record.data;
 };
 
-/* OLD FUNCTIONS */
+LinkedList.prototype.isEmpty = function() {
+    if(this.head === null) return true;
+    
+    return false;
+};
+
+LinkedList.prototype.findMiddle = function() {
+    if(this.head === null) return null;
+    else if(this.head.next === null) return this.head;
+    
+    var middle = this.head;
+    var single = this.head;
+    var count = 0;
+    
+    while(single.next !== null) {
+        single = single.next;
+        count++;
+        
+        if(count == 2) {
+            middle = middle.next;
+            count = 0;
+        }
+    }
+    
+    return middle;
+};
+
 LinkedList.prototype.print = function() {
      console.log('Printing:');
      if(this.head === null) {
@@ -132,6 +154,12 @@ LinkedList.prototype.remove = function(index) {
         return;
     }
     
+    //remove only first item
+    if(this.head.next === null) {
+        this.head = null;
+        return;
+    }
+    
     //First item removed, so make sure that the second item's prev is null, since it's the new head
     if(index === 0) {        
         this.head = this.head.next;
@@ -145,7 +173,6 @@ LinkedList.prototype.remove = function(index) {
     var previous = null;
     var record = this.head; 
     var count = 0;
-
     
     while(count !== index) {
         previous = record;
@@ -154,22 +181,17 @@ LinkedList.prototype.remove = function(index) {
             record = record.next;
             count++;    
         }
-    }
-
-    console.log('removed item ' + record.data + ' at index ' + index);
-    
+    }    
 
     if(record.next === null) { //If removing at the end
         previous.next = null;
-        console.log("replaced by " +  null);
     } else {
-        console.log(" replaced by " + record.next.data);
         record.data = record.next.data;
         record.next = record.next.next;
     }
 };
 
-
+/* OLD FUNCTIONS */
 LinkedList.prototype.insertAt = function(data, index) {
     if(index < 0) throw new OutOfBoundsException();
 
@@ -185,7 +207,8 @@ LinkedList.prototype.insertAt = function(data, index) {
         this.head.data = data;
         this.head.next = node;
         console.log('inserting value ' + data + ' at index ' + index + ' ' + this.head.data);
-        return;
+        
+        return this.head;
     }
 
     while(count != index) {
@@ -195,14 +218,13 @@ LinkedList.prototype.insertAt = function(data, index) {
         count++;
     }
     
-    node = new Node();
-    node.data = data;
-    node.next = record;
+    node = new Node({ data : data, next : record, prev : previous });
     
     previous.next = node;
 
     console.log('inserting value ' + data + ' at index ' + index);
-
+    
+    return node;
 };
 
 function OutOfBoundsException(message) {
@@ -212,7 +234,7 @@ function OutOfBoundsException(message) {
 OutOfBoundsException.prototype = new Error();
 OutOfBoundsException.prototype.constructor = OutOfBoundsException;
 
-
+var node = new Node();
 var linkedList = new LinkedList();
 
 //Prepend to empty list
@@ -273,24 +295,51 @@ linkedList.remove(0);
 console.log('Remove value zero at index 0');
 
 linkedList.print();
-//console.log('Remove value at index 1 ' + linkedList.remove(1)); 
-//console.log('Remove last value: ' + linkedList.remove(1)); 
+
+linkedList.remove(1);
+console.log('Remove value second at index 1'); 
+
+linkedList.remove(1);
+console.log('Remove last value'); 
+
+linkedList.print();
+
+console.log('Is list empty? ' + linkedList.isEmpty());
+
+
+linkedList.remove(0);
+console.log('Remove "first" value');
+
+console.log('Is list empty? ' + linkedList.isEmpty());
+
+console.log('What is the middle of empty? ' + linkedList.findMiddle());
+
+linkedList.append('first');
+linkedList.print();
+console.log('What is the middle of one item? ' + linkedList.findMiddle().data);
+
+linkedList.append('second');
+linkedList.print();
+console.log('What is the middle of two items? ' + linkedList.findMiddle().data);
+
+linkedList.append('third');
+linkedList.print();
+console.log('What is the middle of three items? ' + linkedList.findMiddle().data);
+
+node = linkedList.insertAt('fourth', 3);
+console.log('Insert fourth at the end, prev is - ' + node.prev.data);
+linkedList.print();
+
+node = linkedList.insertAt('two-half',2);
+console.log('Insert two-half in middle, prev is - ' + node.prev.data);
+linkedList.print();
+
+node = linkedList.insertAt('negetive-one', 0);
+console.log('Insert negetive-one at front , prev is - ' + node.prev);
+linkedList.print();
+
 
 /*
-//Remove First
-linkedList.remove(0);
-
-//Remove Middle
-linkedList.remove(1);
-
-//Remove End
-linkedList.remove(1);
-
-//Remove last one
-linkedList.remove(0);
-
-linkedList.print(); //Empty List
-
 linkedList.insertAt(5, 0); //Insert in front
 linkedList.insertAt(12, 2); //Insert between 10, and 20
 linkedList.insertAt(28, 4); //Insert between 20, and 30
