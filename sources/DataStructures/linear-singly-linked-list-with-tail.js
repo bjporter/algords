@@ -7,64 +7,78 @@ function LinkedList() {
     this.head = null;
     this.tail = null;
     this.count = 0;
-}
-
+}           
+            
 LinkedList.prototype.add = function(data) {    
     if(this.head === null) {
-        console.log('The list is empty');
-
+        //console.log('The list is empty');
         this.head = new Node();
         this.head.data = data;
         this.tail = this.head;
         this.count++;
-    }
-    else {
-        console.log('The list is not empty');
+    } else {
+        //console.log('The list is not empty');
         var node = new Node();
         node.data = data;
-
+        
         this.tail.next = node;
         this.tail = node;
         this.count++;
         
-        console.log(this.tail.data);
-    }
-    
-    console.log('added: ' + data);
-};
-
+        //console.log(this.tail.data);
+    }       
+            
+    //console.log('added: ' + data);
+};          
+            
 LinkedList.prototype.insert = function(data, index) {
     if(index < 0) throw new OutOfBoundsException();
-    
+
     var record = this.head;
     var previous = null;
     var count = 0;
-    
-    if(index == this.count) this.add(data);
-    else {
-        
-        while(count != index) {
-            previous = record;
-            if(record.next === null) throw new OutOfBoundsException();
-            else {
-                record = record.next;
-                count++;
-            }
-        }
-        
-        
-        var node = new Node();
-        node.data = data;
-        node.next = record;
-        
-        previous.next = node;
-    
-        console.log('inserting value ' + data + ' at index ' + index);
+    var node = new Node();
 
+    if(index === 0) { //Place at head
+        node.data = this.head.data;
+        node.next = this.head.next;
+        
+        this.head.data = data;
+        this.head.next = node;
+        console.log('inserting value ' + data + ' at index ' + index + ' ' + this.head.data);
+        this.count++;
+        return;
     }
+    if(index === this.count) { //Place at end
+        this.add(data);
+        return;
+    }
+    
+
+    while(count != index) {
+        previous = record;
+        
+        record = record.next;
+        count++;
+    }
+    
+    node = new Node();
+    node.data = data;
+    node.next = record;
+    
+    previous.next = node;
+
+    console.log('inserting value ' + data + ' at index ' + index);
+    this.count++;
 };
 
 LinkedList.prototype.print = function() {
+    
+     if(this.head === null) {
+        console.log('List is empty.');
+        return;
+     }
+     
     var record = this.head;
     var count = 0;
     
@@ -106,32 +120,57 @@ LinkedList.prototype.item = function(index) {
 };
 
 LinkedList.prototype.remove = function(index) {
-     //Check bounds
-     if(index < 0) throw new OutOfBoundsException();
+    if(index < 0) throw new OutOfBoundsException();
      
+    if(this.head === null) {
+        console.log('List is empty.');
+        return;
+     }
+    
+    if(index === 0) {
+        console.log('removed first item');
+        
+        this.head = this.head.next;
+        
+        this.count--;
+        return;
+     }
+    
+    var previous = null;
     var record = this.head; 
     var count = 0;
 
     
-    while(count != index) {
+    while(count !== index) {
+        previous = record;
         if(record.next === null) throw new OutOfBoundsException();
         else  {
             record = record.next;
             count++;    
         }
     }
+
+    console.log('removed item ' + record.data + ' at index ' + index);
     
-    console.log('removed item ' + record.data + ' at index ' + index + " replaced by " + record.next.data);
-    
-    record.data = record.next.data;
-    
-    if(index == this.count) {
+
+    if(record.next === null) { //If removing at the end
+        previous.next = null;
+        console.log("replaced by " +  null);
+    } 
+    else if (index === count) {
+        console.log("removing the end");
+        record.data = record.next.data;
+        record.next = record.next.next;
+
         this.tail = record;
     }
     else {
-        record.next = record.next.next;   
+        console.log(" replaced by " + record.next.data);
+        record.data = record.next.data;
+        record.next = record.next.next;
     }
-        
+    
+    
     this.count--;
 };
 
@@ -148,28 +187,38 @@ linkedList.add(1);
 linkedList.add(2);
 linkedList.add(3);
 linkedList.add(4);
+
 linkedList.print();
 
-console.log('Length = ' + linkedList.length());
+//Remove First
+linkedList.remove(0);
 
-linkedList.item(0);
-linkedList.item(1);
-linkedList.item(2);
-linkedList.item(3);
-
-linkedList.add(100);
-linkedList.print();
-
+//Remove Middle
 linkedList.remove(1);
-linkedList.print();
 
+//Remove End
 linkedList.remove(1);
+
+//Remove last one
+linkedList.remove(0);
+
+linkedList.print(); //Empty List
+
+linkedList.add(10);
+linkedList.add(20);
+linkedList.add(30);
+linkedList.add(40);
+
+linkedList.item(0); //10
+linkedList.item(1); //20
+linkedList.item(2); //30
+linkedList.item(3); //40
+
+linkedList.insert(5, 0); //Insert in front
+linkedList.insert(12, 2); //Insert between 10, and 20
+linkedList.insert(28, 4); //Insert between 20, and 30
+linkedList.insert(114,7); //Insert at the end
+
 linkedList.print();
 
-
-linkedList.item(0);
-linkedList.item(1);
-linkedList.item(2);
-
-linkedList.add(6);
-linkedList.print();
+console.log('The Length = ' + linkedList.length());

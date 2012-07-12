@@ -9,13 +9,10 @@ function LinkedList() {
 
 LinkedList.prototype.add = function(data) {    
     if(this.head === null) {
-        //console.log('The list is empty');
-
         this.head = new Node();
         this.head.data = data;
     }
     else {
-       // console.log('The list is not empty');
         var node = new Node();
         node.data = data;
                 
