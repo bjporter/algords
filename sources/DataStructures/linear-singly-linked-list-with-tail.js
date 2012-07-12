@@ -80,6 +80,10 @@ LinkedList.prototype.print = function() {
     }
 };
 
+LinkedList.prototype.length = function() {
+    return this.count;
+};
+
 LinkedList.prototype.item = function(index) {
     //check bounds
     if(index < 0) throw new OutOfBoundsException();
@@ -145,6 +149,8 @@ linkedList.add(2);
 linkedList.add(3);
 linkedList.add(4);
 linkedList.print();
+
+console.log('Length = ' + linkedList.length());
 
 linkedList.item(0);
 linkedList.item(1);

@@ -114,7 +114,7 @@ LinkedList.prototype.remove = function(index) {
     }
 };
 
-LinkedList.prototype.count = function() {
+LinkedList.prototype.length = function() {
     var count = 1;
     var record = this.head;
     
@@ -128,7 +128,7 @@ LinkedList.prototype.count = function() {
         
         return count;
     }
-}
+};
 
 LinkedList.prototype.insert = function(data, index) {
     if(index < 0) throw new OutOfBoundsException();
@@ -212,4 +212,4 @@ linkedList.insert(114,7); //Insert at the end
 
 linkedList.print();
 
-console.log('The Count = ' + linkedList.count());
+console.log('The Length = ' + linkedList.length());
