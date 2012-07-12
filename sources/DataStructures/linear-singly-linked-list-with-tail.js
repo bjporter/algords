@@ -133,7 +133,7 @@ LinkedList.prototype.remove = function(index) {
     }
         
     this.count--;
-}
+};
 
 function OutOfBoundsException(message) {
     this.name = "OutOfBounds";
