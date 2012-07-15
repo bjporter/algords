@@ -1,5 +1,3 @@
-//Improve remove, add insert, and test with tail code for singly linear linked list [Done]
-//Add circular singly linked list [Done]
-//Add doubly
+//Add Binary Search Tree
 //Add Multiplyee
-//Add in browser unit tests
+//Add Require js support / underscore
