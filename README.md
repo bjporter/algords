@@ -5,4 +5,4 @@
         2) Linear Singly Linked List with a Tail (non-recursive)
         3) Circular Singly Linked List (non-recursive)
         4) Doubly Linked List (non-recursive)
-        5) [Unfinished] Binary Search Tree (recursive)
+        5) [Almost Finished] Binary Search Tree (recursive)
