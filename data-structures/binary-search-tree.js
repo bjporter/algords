@@ -48,7 +48,22 @@ BinarySearchTree.prototype.insert = function(key, node) {
 };
 
 BinarySearchTree.prototype.search = function(key, node) {
+    if(this.root === null)
+        return null;
     
+    if(node === undefined)
+        node = this.root;
+        
+    if(node.key === key)
+        return node;
+        
+    if(node.left !== null)
+        return this.search(key, node.left);
+    
+    if(node.right !== null)
+        return this.search(key, node.right);
+
+    else return null;
 };
 
 BinarySearchTree.prototype.size = function(node) {
