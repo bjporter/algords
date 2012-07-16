@@ -1,8 +1,41 @@
 <head>
-    <title>Linked List</title>
+    <title>Doubly Linked List</title>
     <script src="../data-structures/doubly-linked-list.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../resources/qunit/qunit/qunit.css">
 </head>
 <body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="../resources/qunit/qunit/qunit.js"></script>
+  <script>
+    var node = new Node();
+    var list = new LinkedList();
     
+    list.append(1);
+    list.append(2);
+    list.append(3);
+    list.append(4);
+  
+    //These are for Insert not append
+    /*test( "append() to front", function() {
+        equal( list.item(0), 1, "We expect append() to insert value in the front" );
+    });
+    
+    test( "append() to middle", function() {
+        equal( list.item(2), 3, "We expect append() to insert value in the middle" );
+    });
+    
+    test( "append() to end", function() {
+        equal( list.item(3), 4, "We expect append() to insert value at the end" );
+    });*/
+  
+    test( "length()", function() {
+        equal( list.length(), 4, "We expect length() to return the length of the list" );
+    });
+    
+    test( "isEmpty()", function() {
+        equal( list.isEmpty(), false, "We expect isEmpty to return false" );
+    });
+  </script>
 </body>
 </html>
