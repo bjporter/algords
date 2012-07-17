@@ -25,29 +25,34 @@ function BinarySearchTree() {
 }
 
 BinarySearchTree.prototype.insert = function(key, node, parent) {    
-    //Tree is empty, insert the first node
+    //CASE: Tree is empty, create root node
     if(this.root === null) {
         this.root = new Node({ key : key });
         return this.root;
     } 
     
-    //node not given, so assume node is root
+    //Node argument not given, set node to root
     if(this.root !== null && node === undefined)  {
         node = this.root;   
     }    
     
+    //This is the final destination. Set node's values
     if(node.key === null) {
         node.key = key;
         node.parent = parent;
         return node;
     }
     
+    //Value is smaller, go left
     if(key < node.key) {
+        //*TODO* Can optimize by moving the if(node.key === null) code (and the right case) inside the if statement here
         if(node.left === null) {
             node.left = new Node();
         }
         this.insert(key, node.left, node);
     }
+    
+    //Value is larger, go right
     else if(key > node.key) {
         if(node.right === null) {
             node.right = new Node();
@@ -88,15 +93,6 @@ BinarySearchTree.prototype.size = function(node) {
     return this.size(node.right) + this.size(node.left) + 1;
 };
 
-BinarySearchTree.prototype.test = function(node) {
-    node.left =null;
-    node.right=null;
-    node = new Node();
-    node =null;
-    
-    return node;
-};
-
 BinarySearchTree.prototype.remove = function(node) {
     //CASE: There are no nodes
     if(this.root === null)
@@ -123,8 +119,8 @@ BinarySearchTree.prototype.remove = function(node) {
         node.data = node.right.data;
         node.right = null;    
     }
+    //CASE: There are 2 children   
     else {
-        //CASE: There are 2 children   
         var min = this.findMin(node.right);
         
         node.key = min.key;
@@ -143,6 +139,42 @@ BinarySearchTree.prototype.findMin = function(node) {
     return this.findMin(node.left);
 };
 
+/*
 
+Traversal
+    * See difference between in/post/pre:s http://datastructuresnotes.blogspot.com/2009/02/binary-tree-traversal-preorder-inorder.html
 
+*/
+BinarySearchTree.prototype.inOrder = function(node) {
+    if(node === null) 
+        return;
+    
+    this.inOrder(node.left);
+    
+    console.log('key: ' + node.key);
+    
+    this.inOrder(node.right);
+};
+
+//Step down the tree one by one (left to right), starting with the root, then left branch, and right branch
+BinarySearchTree.prototype.preOrder = function(node) {
+    if(node === null) 
+        return;
+    
+    console.log('key: ' + node.key);
+    
+    this.preOrder(node.left);
+    this.preOrder(node.right);
+};
+
+//Move through outer most leafs and move up the branch, starting with left, then right, and end with the root
+BinarySearchTree.prototype.postOrder = function(node) {
+    if(node === null)
+        return;
+        
+    this.postOrder(node.left);
+    this.postOrder(node.right);
+    
+    console.log('key: ' + node.key);
+};
 
