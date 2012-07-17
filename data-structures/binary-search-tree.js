@@ -4,7 +4,6 @@ Binary Search Tree (recursive, no duplicates)
 
 */
 
-
 function Node(values) {
     if(values === undefined) {
         this.right = null;
