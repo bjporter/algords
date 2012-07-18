@@ -23,28 +23,19 @@ function SkipList() {
     for(var i = 0; i < this.maxLevel; i++) this.header.forward[i] = this.nil;
     
     this.search = function(key) {
-        var x = this.header;
-        
-        
-    }
+        //var x = this.header;
+    };
         
     this.insert = function(key, value) {
         var update = []; //Hold values to use as forward for levels
         var x = this.header;
-        console.log(x.forward[0]);
-        console.log('Starting... ' + x.forward.length + ' ' + x.forward[6]);
         
         //Iterate through the levels
-        for(var i = x.forward.length - 1; i >= 0; i--) {
-            console.log('Level = ' + i + ', ' + x.forward[i]);
-                
-            while(x.forward[i].key < key) {
+        for(var i = x.forward.length - 1; i >= 0; i--) {                
+            while(x.forward[i].key < key) 
                 x = x.forward[i];
-                console.log('Iterating @ ' + i + ' key = ' + x.forward[i]);
-            }
             
             update[i] = x;
-           console.log('update[' + i + '] = ' + x.key);
         }
 
         x = x.forward[0];
@@ -54,7 +45,6 @@ function SkipList() {
             x.value = value;
         else {
             var newLevel = this.randomLevel();
-            console.log('New level is ' + newLevel);    
             
             if(newLevel > this.level) {
                 for(i = this.level; i < newLevel; i++) {
@@ -62,21 +52,14 @@ function SkipList() {
                 }
              
                 this.level = newLevel;
-                console.log('new level is = ' + this.level);
             }
                             
             //Create new node, set the values, then fill it with the forward pointers
             x = new Node({ level : newLevel, key : key, value : value });
-            console.log('new node = ' + x);
-            console.log(x);
             
             for(i = 0; i < newLevel; i++) {
                 x.forward[i] = update[i].forward[i];
                 update[i].forward[i] = x;
-                console.log('x.forward[' + i + '] = ' + x.forward[i]);
-                console.log(x.forward[i]);
-                console.log('update[' + i + '] = ' + update[i]);            
-                console.log(update[i]);
             }                    
         }
     };
