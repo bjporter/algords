@@ -72,6 +72,60 @@ function SkipList() {
         }
     };
     
+    this.length = function() {
+        if(this.isEmpty())
+            return 0;
+        
+        var x = this.header.forward[0];
+        var count = 0;
+        
+        
+        while(x.key < Number.MAX_VALUE) {
+            x = x.forward[0];
+            count++;
+        }
+        
+        return count;
+    };
+
+    this.isEmpty = function() {
+        if(this.header.forward[0].key === Number.MAX_VALUE)
+            return true;
+            
+        else 
+            return false;
+    };
+
+    this.print = function() {
+        if(this.isEmpty()) {
+            console.log("The list is empty");
+            return;
+        }
+                    
+        var x = this.header;
+        var out = "";
+        
+        for(var i = x.forward.length - 1; i >= 0; i--) {          
+            console.log("level: " + i);
+            var tempx = x;
+            out += "\tHead\t->\t";
+            
+            while(x.forward[i].key < Number.MAX_VALUE) {
+                out += x.forward[i].key + "\t->\t";
+                x = x.forward[i];
+            }
+
+            out+= "Nil";
+            console.log(out);
+            
+            out = "\t";
+            
+            x = tempx;
+
+        }
+        
+    };
+    
     this.remove = function(key) {
         /* TODO */
     };
