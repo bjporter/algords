@@ -23,7 +23,15 @@ function SkipList() {
     for(var i = 0; i < this.maxLevel; i++) this.header.forward[i] = this.nil;
     
     this.search = function(key) {
-        //var x = this.header;
+        var x = this.header;
+        
+        for(var i = x.forward.length - 1; i >= 0; i--) {
+            while(x.forward[i].key < key)
+                x = x.forward[i];
+        }
+        
+        console.log(x.forward[0]);
+        return x.forward[0];
     };
         
     this.insert = function(key, value) {

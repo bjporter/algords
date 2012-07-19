@@ -6,4 +6,4 @@
         3) Circular Singly Linked List (non-recursive)
         4) Doubly Linked List (non-recursive)
         5) Binary Search Tree (recursive, no duplicates)
-        6) (Planned) Skip Lists
+        6) Skip Lists (non-recursive) (Implementation: Pugh, 1989)

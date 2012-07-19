@@ -1,3 +1,32 @@
-//Implement unit tests via QUnit [WIP]
-//Add Require js support / underscore
-//Visual support using D3 or better library
+================================================================
+To Do:
+================================================================
+1)  Implement unit tests via QUnit [WIP]
+2)  Add Require js support / underscore
+3)  Visual support using D3 or better library
+4)  Clean up code in algorithms - take out prototype
+5)  New Algorithms
+    a) Red-black Tree
+    b) AVL Tree
+    c) Splay Tree
+    d) Graph
+        i)   Undirected
+        ii)  Directed
+6)  Implement recursive versions 
+7)  Algorithms
+    a)  DSW Algorithm
+    b)  Breadth First Search
+    c)  Depth First Search
+    d)  Sort
+        i)    Radix
+        ii)   Quick     - One pointer at beginning, and one at the end
+        iii)  Insertion - Iterate through, grab the next largest, and iterate backwards until the place is found
+        iv)   Merge
+        v)    Bubble    - Pointer to end of sorted elements, and end of list. The one at the end of the list finds the smallest and moves that to the front
+        vi)   Bucket
+        vii)  Heap     
+        viii) Selection - Iterate through, grab the next largest, insert into the pointer of the end of the sorted elements
+        ix)   Shell     - Front pointer starts at 0, middle pointer in the middle. ???
+        x)    Shaker    - Pointer to front, and middle, the iterate forward together, and they swap values, smallest going to the front, skipping values that are in order.
+                          Once the end pointer gets to the back of the list, it moves forward half the distance it started (1/4) and repeats the process. Goes 1/2, 1/4, 1/8, 1/16, etc
+    
