@@ -127,7 +127,40 @@ function SkipList() {
     };
     
     this.remove = function(key) {
-        /* TODO */
+        var x = this.header;
+        var update = [];
+        console.log(x.forward.length - 1);
+        
+        //Loop through forward levels
+        for(var i = x.forward.length - 1; i >= 0; i--) {
+            //Loop through linked list on particular level until a great key is found
+            console.log('i = ' + i);
+            while(x.forward[i].key < key) {
+                x = x.forward[i]; //if key is less, move forward
+                console.log('x.forward[' + i + '] = ' + x.key);
+            }   
+            update[i] = x; //keep note of the last key before greater
+        }
+        console.log('2');
+        x = x.forward[0]; //set to the bottom 
+        
+        console.log('x.forward[0] = ' + x.key);
+        if(x.key === key) { console.log('found key ' + x.key);
+            for(i = 0; i < this.level - 1; i++) {
+                if(update[i].forward[i] !== x) 
+                    break;
+                
+                update[i].forward[i] = x.forward[i];
+            }
+            
+            x = null;
+            
+            //Set the list level to the tallest in the list
+            while (this.level > 1 && this.header.forward[this.level - 1] === Number.MAX_VALUE)
+                this.level--;
+        }
+        
+        
     };
     
     //Generate a random number. If it's less than p, increment the level, 

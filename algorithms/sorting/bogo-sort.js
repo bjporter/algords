@@ -8,8 +8,8 @@ function bogosort(list) {
     }
 }
 
-function randomNumRange(max, min) {
-    return parseInt(Math.random() * (max - min), 10) + min; 
+function randomNumRange(min, max) {
+    return parseInt(Math.random() * ((max + 1) - min), 10) + min; 
 }
 
 function shuffle(list) {
