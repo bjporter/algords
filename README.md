@@ -10,4 +10,5 @@
     
     Algorithms:
         Sorting: 
-            - Bogo Sort (for fun - running time of O(n^n))
+            - Bogo Sort (randomly shuffle list, check if it's in order, repeat)
+            - Bozo Sort (randomly swap two values, check if list is in order, repeat)
