@@ -13,3 +13,4 @@
             - Bogo Sort (randomly shuffle list, check if it's in order, repeat)
             - Bozo Sort (randomly swap two values, check if list is in order, repeat)
             - Insertion Sort
+            - Stooge Sort
